@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+  </head>
+  <style>
+      
+      div{display: flex; flex-direction: row; justify-content: center; padding-top: 200px; }
+      button{margin: 10px 10px; background-color: aqua; color: white; font-weight: bold; outline: none; border: none; padding: 50px 50px; font-size: 30px;}
+      h4{color: white; background-color: palevioletred; padding: 50px 50px; font-size: 30px}
+      h2{color: palevioletred; background-color: white; padding: 10px 10px; font-size: 30px; border:2px solid palevioletred}
+  </style>
+  <body>
+      <div id='main'>
+          <button id='subber'> - </button>
+          <h4 id='count'></h4>
+          <button id='adder'> + </button>
+      </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/sockets.js"></script>
+  </body>
+</html>
