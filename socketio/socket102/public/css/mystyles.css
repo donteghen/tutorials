@@ -3,6 +3,7 @@
         padding:0;
         height: 100%;
         width: 100%;
+        overflow: none;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
     }
     .container{
@@ -15,12 +16,14 @@
         padding: 20px 10px;
         width: 25%;
         height: 100hv;
+        
     }
     .mainarea{
         background: white;
         padding: 20px 10px;
         width:75%;
         height: 100%;
+        overflow: scroll;
     }
     #form { 
         background: rgba(0, 0, 0, 0.15); 
@@ -63,22 +66,51 @@
         margin: 0;
         padding: 0;
     }
-    #messages > li { padding: 0.5rem 1rem
+    #messages > li { 
+        padding: 0.5rem 1rem;
+        font-size: 16px;
     }
 
     #messages > li:nth-child(odd) { 
         background: palevioletred;
-        color: white
+        color: white;
+        font-size: 16px;
+    }
+    #users { 
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        
+    }
+    #users > li { 
+        padding: 0.5rem 1rem;
+        color: white;
+        font-size: 16px;
+    }
+
+    #users > li:nth-child(odd) { 
+        color: white;
+        font-size: 16px;
+        opacity: 0.8;
     }
     .joinClass{
         color: white;
         margin: 4px 0;
         padding: 10px 10px;
+        font-size: 16px;
     }
-    span{margin: 0 20px;
-        font-size: 8px;
+    span{
+        margin-right: 20px;
         font-style: italic;
     }
     h1{
         color: white;
+    }
+    .name{
+        font-weight: bold;
+        font-size: 14px;
+    }
+    .date{
+        opacity: 0.6;
+        font-size: 16px;
     }

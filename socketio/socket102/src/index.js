@@ -38,12 +38,19 @@ io.on('connection', (socket) => {
             joinedAt : generateJoinMessage(user.username,latitude,longitude).joinedAt
         }
         )
+
+        io.to(user.room).emit('ROOMINFO', {
+            room: user.room,
+            allMembers : getUsersInRoom({room : user.room})
+        })
         callback()
     });
 
     socket.on('TEXTING', (content, callback)=> {
         if(filter.isProfane(content)){
-            callback(error)
+            callback({
+                message : 'Please avoid profanity!'
+            })
         }
         const user = getUser({ id : socket.id })
         io.to(user.room).emit('TEXTED', generateMessage(filter.clean(content), user.username))
@@ -52,7 +59,11 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         const user  = removeUser({id : socket.id})
         if(user) {
-            io.to(user.room).emit('LEFT', `${user.username} just left the room`)
+            io.to(user.room).emit('LEFT', `${user.username} just left the room`);
+            io.to(user.room).emit('ROOMINFO', {
+                room: user.room,
+                allMembers : getUsersInRoom({room : user.room})
+            })
         }
     })
 })

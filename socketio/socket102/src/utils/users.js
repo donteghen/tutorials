@@ -18,7 +18,7 @@ const addUser = ({id, username, room}) => {
     }
     const user = {id, username, room}
     users.push(user)
-    console.log(users)
+    
     return {user:user}
 }
 
