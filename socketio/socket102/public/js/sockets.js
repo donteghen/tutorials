@@ -4,14 +4,37 @@ let form = document.getElementById('form');
 let input = document.getElementById('input');
 let btn = document.getElementsByTagName('button')[0]
 let ul = document.getElementById('messages');
-const upperSideDiv = document.getElementById('Upper_sideDiv')
-const lowerSideDiv = document.getElementById('Lower_sideDiv')
+const roomtitle = document.getElementById('roomTitle');
+const upperSideDiv = document.getElementById('Upper_sideDiv');
+const lowerSideDiv = document.getElementById('Lower_sideDiv');
 let mylocation = ''
-const messDiv = document.querySelector('#messDiv')
-const messages = document.querySelector('#message-template')
+
 let user = ''
 const {username, room} = Qs.parse(location.search, {ignoreQueryPrefix:true})
 user = username;
+
+const autoScroll = () => {
+
+  // new message element
+  const $newMessage = ul.lastElementChild
+  
+  // height of the new message
+  const newMessageStyles = getComputedStyle($newMessage)
+  const newMessageMargin = parseInt(newMessageStyles.marginButton)
+  const newMessageHeight = $newMessage.offsetHeight + newMessageMargin
+
+  // visible height
+  const visibleHeight = ul.offsetHeight;
+
+  // container height 
+  const containerHeight = ul.scrollHeight;
+
+  // current scroll position
+  const offsetScroll = ul.scrollTop + visibleHeight;
+  if(containerHeight - newMessageHeight <= offsetScroll) {
+    ul.scrollTop = ul.scrollHeight
+  }
+}
 async function getLocation() {
   btn.setAttribute('disabled', 'disabled')
   function success (position){
@@ -48,7 +71,7 @@ form.addEventListener('submit', (e) => {
 })
 
 socket.on('ROOMINFO', ({room, allMembers}) => {
-  console.log(room, allMembers)
+  roomtitle.innerText = `${room} Room`;
   lowerSideDiv.innerHTML = '';
   const p = document.createElement('p');
   const list = document.createElement('ul')
@@ -98,5 +121,5 @@ socket.on('TEXTED', ({sender, text, createdAt}) => {
   p.appendChild(name);
   p.appendChild(date)
   li.insertAdjacentElement('afterbegin', p)
-  ul.appendChild(li)
+  ul.prepend(li)
 })
